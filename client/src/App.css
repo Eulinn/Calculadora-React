@@ -1,0 +1,13 @@
+.ContainerCalculator{
+  width: clamp(300px,50%, 350px);
+  height: 90%;
+  max-height: 700px;
+
+
+  /* background-color: red; */
+  border-radius: 10px;
+  box-shadow: 0 0 10px #181818;
+
+  display: flex;
+  flex-direction: column;
+}
