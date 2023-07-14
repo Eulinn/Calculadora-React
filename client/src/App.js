@@ -12,9 +12,10 @@ import { BsPlusSlashMinus } from "react-icons/bs";
 function App() {
 
   const [Number1, setNumber1] = useState(0)
-  const [Number2, setNumber2] = useState(null)
+  const [signal, setsignal] = useState('')
+  const [Number2, setNumber2] = useState([])
 
-  const [displayContent, setDisplayContent] = useState(Number1);
+  const [displayContent, setDisplayContent] = useState(0);
   const [Elements, setElements] = useState([
     '%',
     'CE',
@@ -42,18 +43,23 @@ function App() {
     '=',
   ])
 
-
-  const ChangeDisplay = (param) =>{
-
-    if(displayContent === 0){
-      setDisplayContent(param)
+  const HandleClick = async (param) =>{
+    if(!isNaN(param)){
+      
+      setNumber2([...Number2, param])
+      setDisplayContent(String(Number2.map(item=>{return item})).replace(/,/g,''))
       return
     }
 
-    setDisplayContent(`${displayContent}${param}`)
+    setNumber1(Number2)
+    setsignal(param)
 
-
+   
+    
   }
+
+
+
 
 
 
@@ -62,9 +68,9 @@ function App() {
     <div className="ContainerCalculator">
         <Display text={displayContent} />
         <Keyboard>
-          {Elements.map(item=>{
+          {Elements.map((item, index)=>{
             return(
-              <Button Element={item} Number={isNaN(item) ? true : false} HandleClick={ChangeDisplay} />
+              <Button key={index} Element={item} Number={isNaN(item) ? true : false} HandleClick={HandleClick} />
             )
           })}
         </Keyboard>
